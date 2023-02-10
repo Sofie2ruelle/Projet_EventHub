@@ -2,6 +2,7 @@ package fr.dawan.eventhub.entities;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,8 +28,10 @@ public class User {
 	
 	private String lastname;
 	
+	@Column(unique=true, nullable=false)
 	private String email;
 	
+	@Column(nullable=false)
 	private String password;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)

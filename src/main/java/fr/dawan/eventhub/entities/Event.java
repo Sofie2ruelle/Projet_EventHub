@@ -2,7 +2,10 @@ package fr.dawan.eventhub.entities;
 
 import java.time.LocalDateTime;
 
+import fr.dawan.eventhub.Enum.TypeEvent;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +18,8 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String type;
+	@Enumerated(EnumType.STRING)
+	private TypeEvent type;
 	
 	private String titre;
 	private String description;
@@ -34,7 +38,7 @@ public class Event {
 		
 	}
 	
-	public Event(String type, String titre, String description, String resume, LocalDateTime date_event, String lieu,
+	public Event(TypeEvent type, String titre, String description, String resume, LocalDateTime date_event, String lieu,
 			Double prix) {
 		super();
 		this.type = type;
@@ -54,10 +58,10 @@ public class Event {
 		this.id = id;
 	}
 	
-	public String getType() {
+	public TypeEvent getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(TypeEvent type) {
 		this.type = type;
 	}
 	
