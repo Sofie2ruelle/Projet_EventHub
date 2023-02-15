@@ -2,6 +2,7 @@ package fr.dawan.eventhub.entities;
 
 import java.util.List;
 
+import fr.dawan.eventhub.Enum.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

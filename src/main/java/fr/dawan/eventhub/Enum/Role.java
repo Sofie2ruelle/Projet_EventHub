@@ -1,4 +1,4 @@
-package fr.dawan.eventhub.entities;
+package fr.dawan.eventhub.Enum;
 
 
 

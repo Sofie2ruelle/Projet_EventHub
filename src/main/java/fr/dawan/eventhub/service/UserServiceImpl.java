@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.dawan.eventhub.entities.Role;
+import fr.dawan.eventhub.Enum.Role;
 import fr.dawan.eventhub.entities.User;
 import fr.dawan.eventhub.repositories.UserRepository;
 
