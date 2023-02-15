@@ -1,4 +1,4 @@
-package fr.dawan.eventhub.service;
+package fr.dawan.eventhub.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.dawan.eventhub.Enum.Role;
 import fr.dawan.eventhub.entities.User;
 import fr.dawan.eventhub.repositories.UserRepository;
+import fr.dawan.eventhub.service.UserService;
 
 
 
@@ -20,43 +21,37 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Override
+	public User findById(Long id) {
+		return userRepository.findById(id).get();
+	}
+	
+	@Override
 	public List<User> findAllAdmin() {
-		
 		return userRepository.findAllByRole(Role.ADMIN);
 	}
 
 	@Override
 	public List<User> findAllUser() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAllByRole(Role.USER);
 	}
 
 	@Override
 	public List<User> findAll() {
-		
 		return userRepository.findAll();
 	}
 
 	@Override
-	public Long deleteUser(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
 	}
 
 	@Override
 	public User createUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(user);
 	}
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(user);
 	}
-	
-	
-	
-	
-
 }

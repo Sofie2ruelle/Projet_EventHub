@@ -6,10 +6,11 @@ import fr.dawan.eventhub.entities.User;
 
 public interface UserService {
 	
+	User findById(Long id);
 	List<User> findAllAdmin();
 	List<User> findAllUser();
 	List<User> findAll();
-	Long deleteUser(Long id);
+	void deleteUser(Long id);
 	User createUser(User user);
 	User updateUser(User user);
 }
