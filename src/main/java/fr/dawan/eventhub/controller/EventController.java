@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.dawan.eventhub.entities.Event;
 import fr.dawan.eventhub.service.EventService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -24,13 +25,12 @@ public class EventController {
 	@Autowired
 	private EventService service;
 	
-	@CrossOrigin
+
 	@GetMapping(produces="application/json")
 	public List<Event> findAll(){
 		return service.findAll();
 	}
 	
-	@CrossOrigin
 	@GetMapping(value="/{id}", produces = "application/json")
 	public ResponseEntity<Event> findEventPerId(@PathVariable Long id) {
 		Event event=service.findById(id);
@@ -41,7 +41,6 @@ public class EventController {
 		return ResponseEntity.notFound().build();	
 	}
 	
-	@CrossOrigin
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<String> deleteEvent(@PathVariable long id){
 		try {
@@ -52,15 +51,13 @@ public class EventController {
 		return ResponseEntity.ok("L'evenement à déjà été supprimé");
 	}
 	
-	@CrossOrigin
 	@PutMapping(value="/{id}", produces="application/json", consumes ="application/json")
 	public Event updateEvent(@PathVariable Long id, @RequestBody Event event) {
 		return service.updateEvent(event);
 	}
 	
-	@CrossOrigin
 	@PostMapping(produces="application/json", consumes="application/json")
-	public Event createEvent(@RequestBody Event user) {
-		return service.createEvent(user);
+	public Event createEvent(@RequestBody Event event) {
+		return service.createEvent(event);
 	}
 }

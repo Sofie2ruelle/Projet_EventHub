@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -27,6 +28,8 @@ public class Event {
 	private LocalDateTime date_event;
 	private String lieu;
 	private Double prix;
+	@Lob
+	private byte[] img;
 	
 	@ManyToOne
 	private User user;
@@ -39,7 +42,7 @@ public class Event {
 	}
 	
 	public Event(TypeEvent type, String titre, String description, String resume, LocalDateTime date_event, String lieu,
-			Double prix) {
+			Double prix, byte[] img, User user) {
 		super();
 		this.type = type;
 		this.titre = titre;
@@ -48,65 +51,88 @@ public class Event {
 		this.date_event = date_event;
 		this.lieu = lieu;
 		this.prix = prix;
+		this.img = img;
+		this.user = user;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public TypeEvent getType() {
 		return type;
 	}
+
 	public void setType(TypeEvent type) {
 		this.type = type;
 	}
-	
+
 	public String getTitre() {
 		return titre;
 	}
+
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String getResume() {
 		return resume;
 	}
+
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
-	
+
 	public LocalDateTime getDate_event() {
 		return date_event;
 	}
+
 	public void setDate_event(LocalDateTime date_event) {
 		this.date_event = date_event;
 	}
-	
+
 	public String getLieu() {
 		return lieu;
 	}
+
 	public void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
-	
-	
+
 	public Double getPrix() {
 		return prix;
 	}
+
 	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
-	
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }
