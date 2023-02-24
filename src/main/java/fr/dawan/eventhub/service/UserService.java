@@ -7,6 +7,7 @@ import fr.dawan.eventhub.entities.User;
 public interface UserService {
 	
 	User findById(Long id);
+	User findByEmail(String email);
 	List<User> findAllAdmin();
 	List<User> findAllUser();
 	List<User> findAll();
