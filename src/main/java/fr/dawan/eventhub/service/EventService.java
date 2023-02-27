@@ -6,6 +6,8 @@ import fr.dawan.eventhub.entities.Event;
 
 public interface EventService {
 	
+	public List<Event> findAllEventsByIdUser(Long id);
+	
 	Event findById(Long id);
 	List<Event> findAll();
 	void deleteEvent(Long id);

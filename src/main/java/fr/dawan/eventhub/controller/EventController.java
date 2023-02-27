@@ -24,7 +24,6 @@ public class EventController {
 	
 	@Autowired
 	private EventService service;
-	
 
 	@GetMapping(produces="application/json")
 	public List<Event> findAll(){
@@ -39,6 +38,16 @@ public class EventController {
 			return ResponseEntity.ok(event);
 		}
 		return ResponseEntity.notFound().build();	
+	}
+	
+	// Trouver tous les événements d'un utilisateur.
+	@GetMapping(value="/events-by-user/{id}", produces = "application/json")
+	public ResponseEntity<List<Event>> findAllEventsByIdUser(@PathVariable Long id){
+		List<Event> events=service.findAllEventsByIdUser(id);
+		if(events != null) {
+			return ResponseEntity.ok(events);
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping(value="/{id}")
