@@ -25,11 +25,13 @@ public class EventController {
 	@Autowired
 	private EventService service;
 
+	// Trouver tout les événements.
 	@GetMapping(produces="application/json")
 	public List<Event> findAll(){
 		return service.findAll();
 	}
 	
+	// Trouver un événement par son id.
 	@GetMapping(value="/{id}", produces = "application/json")
 	public ResponseEntity<Event> findEventPerId(@PathVariable Long id) {
 		Event event=service.findById(id);
@@ -50,6 +52,7 @@ public class EventController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	// Supprimer un événement
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<String> deleteEvent(@PathVariable long id){
 		try {
@@ -60,11 +63,13 @@ public class EventController {
 		return ResponseEntity.ok("L'evenement à déjà été supprimé");
 	}
 	
+	// Edition d'un événement.
 	@PutMapping(value="/{id}", produces="application/json", consumes ="application/json")
 	public Event updateEvent(@PathVariable Long id, @RequestBody Event event) {
 		return service.updateEvent(event);
 	}
 	
+	// Création d'un événemnet.
 	@PostMapping(produces="application/json", consumes="application/json")
 	public Event createEvent(@RequestBody Event event) {
 		return service.createEvent(event);
