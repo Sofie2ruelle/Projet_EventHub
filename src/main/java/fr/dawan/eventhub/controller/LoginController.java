@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.dawan.eventhub.Enum.Role;
+import fr.dawan.eventhub.dtos.LoginDTO;
 import fr.dawan.eventhub.entities.User;
-import fr.dawan.eventhub.form.LoginForm;
 import fr.dawan.eventhub.service.UserService;
+
 
 @CrossOrigin
 @RestController
@@ -25,9 +27,52 @@ public class LoginController {
 	private UserService userService;
 	
 	
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody User user){
+		
+		User u = userService.findByEmail(user.getEmail());
+		Map<String, Object> response = new HashMap<>();
+		
+		if(u!=null) {
+			
+			if(userService.findByPseudo(user.getPseudo())!=null){
+				response.put("succes", false);
+				response.put("message", "L'email et le pseudo sont deja utiliser !");
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+				
+				
+			}		
+			response.put("succes", false);
+			response.put("message", "L'email est deja utiliser !");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+			
+		}
+		
+		if(userService.findByPseudo(user.getPseudo())!=null) {
+			response.put("succes", false);
+			response.put("message", "Pseudo deja utiliser !");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+			
+		}
+		
+		
+		
+		user.setRole(Role.USER);
+		
+		userService.createUser(user);
+		
+		response.put("succes", true);
+		response.put("message", "Utilisateur enregistrer !");
+		
+		
+		return ResponseEntity.ok(response);
+		
+	}
+	
+	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginForm loginForm){
-		User user = userService.findByEmail(loginForm.getEmail());
+	public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
+		User user = userService.findByEmail(loginDTO.getEmail());
 		
 		Map<String, Object> response = new HashMap<>();
 
@@ -38,7 +83,7 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 		}
 		
-		if(!user.getPassword().equals(loginForm.getPassword())) {
+		if(!user.getPassword().equals(loginDTO.getPassword())) {
 			response.put("succes", false);
 			response.put("message", "Mot de passe incorrect.");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
@@ -53,5 +98,10 @@ public class LoginController {
 		return ResponseEntity.ok(response);
 		
 	}
+	
+	
+	
+	
 
 }
+
