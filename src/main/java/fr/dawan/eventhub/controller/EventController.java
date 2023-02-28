@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +63,7 @@ public class EventController {
 	}
 	
 	// Edition d'un événement.
-	@PutMapping(value="/{id}", produces="application/json", consumes ="application/json")
+	@PostMapping(value="/{id}", produces="application/json", consumes ="application/json")
 	public Event updateEvent(@PathVariable Long id, @RequestBody Event event) {
 		return service.updateEvent(event);
 	}
@@ -72,6 +71,7 @@ public class EventController {
 	// Création d'un événemnet.
 	@PostMapping(produces="application/json", consumes="application/json")
 	public Event createEvent(@RequestBody Event event) {
+		System.out.println("Je suis dans création d'événement");
 		return service.createEvent(event);
 	}
 }
